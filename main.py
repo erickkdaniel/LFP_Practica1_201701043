@@ -91,10 +91,12 @@ def AnalysisText():
         for_score = line2[0].split(";")#Separa Estudiantes
         for_name = []
         for_name = for_score[0].split('"')
+        for_score[1] = for_score[1].replace(" ","")
         if for_score[1].isnumeric():
-            id=id+1
-            new_student= Student(id, int(for_score[1]),for_name[1])
-            Matter_.NewStudent(new_student)
+            if int(for_score[1])>0 :
+                id=id+1
+                new_student= Student(id, int(for_score[1]),for_name[1])
+                Matter_.NewStudent(new_student)
         else:
             print("Error del alumnos: "+for_name[1])
     Matter_.setTotalS(id)
@@ -147,7 +149,7 @@ def printReport(Matter):
 def exportReport(Matter):
     ListStudent = Matter.getFirstList()
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    file = open(dir_path+"\\reporte.html", "w")
+    file = open(dir_path+"\\"+Matter.getnameMatter()+".html", "w")
     file.write('<!DOCTYPE html><html><head><link rel="stylesheet" href="style.css"></head><body>')
     listPara = Matter.getParameter()
     m = Matter.getnameMatter().strip()
@@ -369,11 +371,4 @@ def clearConsole():
         command = 'cls'
     os.system(command)
 clearConsole()
-Cover()
-    
-
-    
-
-        
-
-
+Cover()#C:\Users\danie\Desktop\Ejemplo
